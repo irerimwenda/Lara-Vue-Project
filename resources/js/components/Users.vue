@@ -79,9 +79,8 @@
 
                     <div class="form-group">
                         <label>Bio</label>
-                        <textarea v-model="form.bio" name="bio" id="bio"
+                        <textarea v-model="form.bio" name="bio" id="bio" placeholder="Short intro bio (Optional)"
                             class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }">
-                            Short intro bio (Optional)
                         </textarea>
                         <has-error :form="form" field="bio"></has-error>
                     </div>
@@ -108,7 +107,7 @@
                 </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Create</button>
             </div>
 
         </form>
