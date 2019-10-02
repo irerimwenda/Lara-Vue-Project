@@ -144,20 +144,30 @@
                 axios.get("api/user").then(({ data }) => (this.users = data));
             },
             createUser() {
-                this.$Progress.start()
-                this.form.post('api/user');
+                this.$Progress.start();
 
-                $('#addNewCenter').modal('hide')
+                this.form.post('api/user')
+                .then(() => {
+                    Fire.$emit('afterCreated');
+                    $('#addNewCenter').modal('hide');
 
-                Toast.fire({
-                    type: 'success',
-                    title: 'User created successfully'
-                    })
-                this.$Progress.finish()
+                    Toast.fire({
+                        type: 'success',
+                        title: 'User created successfully'
+                        })
+                    this.$Progress.finish();
+                })
+                .catch(() => {
+                    
+                });
+                
             }
         },
         created() {
             this.loadUsers();
+            Fire.$on('afterCreated', () => {
+                this.loadUsers();
+            });
             //setInterval(() => this.loadUsers(), 3000)
         }
     }

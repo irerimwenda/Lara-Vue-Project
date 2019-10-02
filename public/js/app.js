@@ -2104,18 +2104,28 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     createUser: function createUser() {
+      var _this2 = this;
+
       this.$Progress.start();
-      this.form.post('api/user');
-      $('#addNewCenter').modal('hide');
-      Toast.fire({
-        type: 'success',
-        title: 'User created successfully'
-      });
-      this.$Progress.finish();
+      this.form.post('api/user').then(function () {
+        Fire.$emit('afterCreated');
+        $('#addNewCenter').modal('hide');
+        Toast.fire({
+          type: 'success',
+          title: 'User created successfully'
+        });
+
+        _this2.$Progress.finish();
+      })["catch"](function () {});
     }
   },
   created: function created() {
-    this.loadUsers(); //setInterval(() => this.loadUsers(), 3000)
+    var _this3 = this;
+
+    this.loadUsers();
+    Fire.$on('afterCreated', function () {
+      _this3.loadUsers();
+    }); //setInterval(() => this.loadUsers(), 3000)
   }
 });
 
@@ -74639,6 +74649,8 @@ Vue.filter('capitalize', function (text) {
 Vue.filter('cleanDate', function (created) {
   return moment__WEBPACK_IMPORTED_MODULE_1___default()(created).format('MMMM Do YYYY, h:mm:ss a');
 });
+var Fire = new Vue();
+window.Fire = Fire;
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
