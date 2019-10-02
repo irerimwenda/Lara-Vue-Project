@@ -7,7 +7,7 @@
                 <h3 class="card-title">Users List</h3>
 
                 <div class="card-tools">
-                  <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addNewCenter">
+                  <button class="btn btn-success btn-sm" @click="newModal">
                       <i class="fas fa-user-plus fa-fw"></i> Add New
                     </button>
                 </div>
@@ -34,7 +34,7 @@
                       <td><span class="tag tag-success">{{user.type | capitalize}}</span></td>
                       <td>{{user.created_at | cleanDate}}</td>
                       <td>
-                          <a href="">
+                          <a @click="editModal(user)">
                               <i class="fa fa-edit blue"></i>
                           </a>
                             
@@ -140,6 +140,15 @@
             }
         },
         methods: {
+            newModal() {
+                this.form.reset();
+                $('#addNewCenter').modal('show');
+            },
+            editModal(user) {
+                this.form.reset();
+                $('#addNewCenter').modal('show');
+                this.form.fill(user);
+            },
             deleteUser(id) {
                 Swal.fire({
                     title: 'Are you sure?',
