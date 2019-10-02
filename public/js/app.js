@@ -2115,7 +2115,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.loadUsers();
+    this.loadUsers(); //setInterval(() => this.loadUsers(), 3000)
   }
 });
 
