@@ -59,8 +59,9 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form action="">
+
+            <form @submit.prevent="createUser">
+                <div class="modal-body">
 
                     <div class="form-group">
                         <label>Name</label>
@@ -104,13 +105,15 @@
                         <has-error :form="form" field="password"></has-error>
                     </div>
 
-                </form>
-            </div>
+                </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Create</button>
             </div>
-            </div>
+
+        </form>
+
+        </div> 
         </div>
         </div>
 
@@ -130,6 +133,11 @@
                     bio: '',
                     photo: '',
                 })
+            }
+        },
+        methods: {
+            createUser() {
+                this.form.post('/api/user');
             }
         },
         mounted() {
