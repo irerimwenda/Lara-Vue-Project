@@ -31,8 +31,8 @@
                       <td>{{user.id}}</td>
                       <td>{{user.name}}</td>
                       <td>{{user.email}}</td>
-                      <td><span class="tag tag-success">{{user.type}}</span></td>
-                      <td>{{user.created_at}}</td>
+                      <td><span class="tag tag-success">{{user.type | capitalize}}</span></td>
+                      <td>{{user.created_at | cleanDate}}</td>
                       <td>
                           <a href="">
                               <i class="fa fa-edit blue"></i>
