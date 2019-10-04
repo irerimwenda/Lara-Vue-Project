@@ -133,6 +133,7 @@
                 editmode: false,
                 users : {},
                 form: new Form({
+                    id: '',
                     name: '',
                     email: '',
                     password: '',
@@ -144,7 +145,24 @@
         },
         methods: {
             updateUser() {
-
+                this.$Progress.start();
+                //console.log('Editing data');
+                this.form.put('api/user/' + this.form.id)
+                .then(() => {
+                    //success
+                    $('#addNewCenter').modal('hide');
+                    Swal.fire(
+                        'Updated!',
+                        'Your file has been updated.',
+                        'success'
+                        )
+                    Fire.$emit('afterCreated');
+                    this.$Progress.finish();
+                })
+                .catch(() => {
+                    //error
+                    this.$Progress.fail();
+                });
             },
             newModal() {
                 this.editmode = false;
