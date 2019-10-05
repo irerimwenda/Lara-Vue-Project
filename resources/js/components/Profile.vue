@@ -182,33 +182,38 @@
                                     <div class="form-group">
                                         <label for="name" class="col-sm-2 col-form-label">Name</label>
                                         <div class="col-sm-10">
-                                            <input v-model="form.name" type="text" class="form-control" id="name" placeholder="Name">
+                                            <input v-model="form.name" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" name="name" id="name" placeholder="Name">
+                                            <has-error :form="form" field="name"></has-error>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email" class="col-sm-2 col-form-label">Email</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="email" v-model="form.email"
-                                                placeholder="Email">
+                                            <input type="email" class="form-control" :class="{ 'is-invalid': form.errors.has('email') }" id="email" v-model="form.email"
+                                                placeholder="Email" name="email">
+                                            <has-error :form="form" field="email"></has-error>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="bio" class="col-sm-2 col-form-label">Bio</label>
                                         <div class="col-sm-10">
-                                            <textarea v-model="form.bio" class="form-control" id="bio" 
-                                                placeholder="Bio"></textarea>
+                                            <textarea v-model="form.bio" class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }" id="bio" 
+                                                placeholder="Bio" name="bio"></textarea>
+                                            <has-error :form="form" field="bio"></has-error>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="profilephoto" class="col-sm-2 col-form-label">Profile Photo</label>
                                         <div class="col-sm-10">
-                                            <input @change="updateProfile" type="file" id="profilephoto" class="form-input">
+                                            <input @change="updateProfile" type="file" name="image" id="profilephoto" class="form-input" :class="{ 'is-invalid': form.errors.has('image') }">
+                                            <has-error :form="form" field="image"></has-error>
                                         </div>
                                     </div>    
                                     <div class="form-group">
                                         <label for="password" class="col-sm-10 col-form-label">Password (Leave empty if not changing)</label>
                                         <div class="col-sm-10">
-                                            <input v-model="form.password" type="password" class="form-control" id="password" placeholder="Password">
+                                            <input v-model="form.password" name="password" type="password" class="form-control" :class="{ 'is-invalid': form.errors.has('password') }" id="password" placeholder="Password">
+                                            <has-error :form="form" field="password"></has-error>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -249,12 +254,14 @@
         },
         methods: {
             updateInfo() {
+                this.$Progress.start();
                 this.form.put('api/profile')
                 .then(() => {
 
+                    this.$Progress.finish();
                 })
                 .catch(() => {
-
+                    this.$Progress.fail();
                 });
             },
             updateProfile(e) {
@@ -262,11 +269,21 @@
                 let file = e.target.files[0];
                 //console.log(file);
                 let reader = new FileReader();
-                reader.onloadend = (file) => {
-                    //console.log('RESULT', reader.result)
-                    this.form.photo = reader.result;
+
+                if(file['size'] < 2111775) {
+                        reader.onloadend = (file) => {
+                        //console.log('RESULT', reader.result)
+                        this.form.photo = reader.result;
+                        }
+                    reader.readAsDataURL(file);
+                } else {
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'You are uploading a large file',
+                    })
                 }
-                reader.readAsDataURL(file);
+                
             }
         },
         created() {
