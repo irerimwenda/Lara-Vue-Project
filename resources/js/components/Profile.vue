@@ -182,20 +182,20 @@
                                     <div class="form-group">
                                         <label for="name" class="col-sm-2 col-form-label">Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="name" placeholder="Name">
+                                            <input v-model="form.name" type="text" class="form-control" id="name" placeholder="Name">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email" class="col-sm-2 col-form-label">Email</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="email"
+                                            <input type="email" class="form-control" id="email" v-model="form.email"
                                                 placeholder="Email">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="bio" class="col-sm-2 col-form-label">Bio</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" id="bio"
+                                            <textarea v-model="form.bio" class="form-control" id="bio" 
                                                 placeholder="Bio"></textarea>
                                         </div>
                                     </div>
@@ -208,7 +208,7 @@
                                     <div class="form-group">
                                         <label for="password" class="col-sm-10 col-form-label">Password (Leave empty if not changing)</label>
                                         <div class="col-sm-10">
-                                            <input type="password" class="form-control" id="password" placeholder="Password">
+                                            <input v-model="form.password" type="password" class="form-control" id="password" placeholder="Password">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -231,8 +231,25 @@
 
 <script>
     export default {
+        data() {
+            return {
+                form: new Form({
+                    id: '',
+                    name: '',
+                    email: '',
+                    password: '',
+                    type: '',
+                    bio: '',
+                    photo: '',
+                })
+            }
+        },
         mounted() {
             console.log('Component mounted.')
-        }
+        },
+        created() {
+            axios.get("api/profile")
+            .then(({data}) => (this.form.fill(data)));
+        } 
     }
 </script>
