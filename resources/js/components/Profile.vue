@@ -254,13 +254,16 @@
         },
         methods: {
             getProfilePhoto() {
-                return "img/profile/" + this.form.photo;
+                let photo = (this.form.photo.length > 200) ? this.form.photo : "img/profile/" + this.form.photo;
+                //return "img/profile/" + this.form.photo;
+
+                return photo;
             },
             updateInfo() {
                 this.$Progress.start();
                 this.form.put('api/profile')
                 .then(() => {
-
+                    Fire.$emit('afterUpdated');
                     this.$Progress.finish();
                 })
                 .catch(() => {
@@ -287,11 +290,17 @@
                     })
                 }
                 
+            },
+            loadProfile() {
+                axios.get("api/profile")
+                .then(({data}) => (this.form.fill(data)));
             }
         },
         created() {
-            axios.get("api/profile")
-            .then(({data}) => (this.form.fill(data)));
+            this.loadProfile();
+            Fire.$on('afterUpdated', () => {
+                this.loadProfile();
+            });
         } 
     }
 </script>
