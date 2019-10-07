@@ -112,9 +112,9 @@ const app = new Vue({
       search: ''
     },
     methods: {
-      searchIt() {
+      searchIt: _.debounce(() => {
         //console.log('searching..');
-        Fire.$emit('searching');
-      }
+        Fire.$emit('searching');        
+      }, 1000)
     }
 });

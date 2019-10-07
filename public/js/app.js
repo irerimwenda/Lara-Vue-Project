@@ -79492,10 +79492,10 @@ var app = new Vue({
     search: ''
   },
   methods: {
-    searchIt: function searchIt() {
+    searchIt: _.debounce(function () {
       //console.log('searching..');
       Fire.$emit('searching');
-    }
+    }, 1000)
   }
 });
 
