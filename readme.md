@@ -12,7 +12,7 @@ Complete mini proect using Laravel framework and Vue.js following a tutorial ser
 
 ## Installation
 * Git clone the project
-* Run ```bash composer install ```
+* Run ```composer install ```
 * Configure your database in the .env file
 * Run migrations
-* Run ```bash npm install ```
+* Run ```npm install ```
