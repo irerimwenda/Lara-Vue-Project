@@ -53,8 +53,10 @@
           </div>
         </div>
 
-        <div class="mt-5" v-else>
-            <not-found-error></not-found-error>
+        <div class="row justify-content-center">
+            <div class="col-md-10 mt-5">
+                <not-found-error></not-found-error>
+            </div>
         </div>
 
         <!-- Modal -->
