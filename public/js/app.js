@@ -79495,7 +79495,10 @@ var app = new Vue({
     searchIt: _.debounce(function () {
       //console.log('searching..');
       Fire.$emit('searching');
-    }, 1000)
+    }, 1000),
+    printInvoice: function printInvoice() {
+      window.print();
+    }
   }
 });
 

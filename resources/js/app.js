@@ -115,6 +115,10 @@ const app = new Vue({
       searchIt: _.debounce(() => {
         //console.log('searching..');
         Fire.$emit('searching');        
-      }, 1000)
+      }, 1000),
+
+      printInvoice() {
+        window.print();
+      }
     }
 });

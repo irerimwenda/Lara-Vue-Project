@@ -120,6 +120,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
 
           <li class="nav-item">
+              <a href="{{route('invoice')}}" class="nav-link">
+                <i class="nav-icon fas fa-file teal"></i>
+                <p>
+                  Print Invoice
+                </p>
+              </a>
+            </li>
+
+          <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">

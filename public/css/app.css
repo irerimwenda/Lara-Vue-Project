@@ -29671,3 +29671,7 @@ readers do not read off random characters that represent icons */
   color: #fff !important;
 }
 
+@page {
+  margin: 0;
+}
+
