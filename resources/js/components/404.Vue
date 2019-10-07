@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-10 mt-5">
                 <h3>Oops!... We could not find what you are loking for</h3>
 
                 <svg id="a706cf1c-1654-439b-8fcf-310eb7aa0e00" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
