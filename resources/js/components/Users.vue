@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row mt-5">
+        <div class="row mt-5" v-if="$gate.isAdmin()">
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
@@ -96,7 +96,7 @@
                             'is-invalid': form.errors.has('type') }">
                             <option value="">Select User Role</option>
                             <option value="admin">Admin</option>
-                            <option value="user">Standard User</option>
+                            <option value="standard user">Standard User</option>
                             <option value="author">Author</option>
                         </select>
                         <has-error :form="form" field="type"></has-error>
@@ -204,7 +204,9 @@
                     })
             },
             loadUsers() {
-                axios.get("api/user").then(({ data }) => (this.users = data));
+                if(this.$gate.isAdmin()) {
+                    axios.get("api/user").then(({ data }) => (this.users = data));
+                }
             },
             createUser() {
                 this.$Progress.start();

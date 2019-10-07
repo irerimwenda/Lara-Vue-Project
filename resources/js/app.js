@@ -11,6 +11,9 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router' 
 Vue.use(VueRouter)
 
+import Gate from "./Gate"
+Vue.prototype.$gate = new Gate(window.user);
+
 import moment from 'moment';
 
 import Swal from 'sweetalert2';
