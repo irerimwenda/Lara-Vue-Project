@@ -53,6 +53,10 @@
           </div>
         </div>
 
+        <div class="mt-5" v-else>
+            <not-found-error></not-found-error>
+        </div>
+
         <!-- Modal -->
         <div class="modal fade" id="addNewCenter" tabindex="-1" role="dialog" aria-labelledby="addNewCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

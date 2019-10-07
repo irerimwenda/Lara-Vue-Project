@@ -1,8 +1,9 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10 mt-5">
-                <not-found-error></not-found-error>
+            <div class="col-md-10">
+                <h3>Ooops! We could not find what you are loking for</h3>
+                Not Found
             </div>
         </div>
     </div>
