@@ -48,12 +48,19 @@
                 </table>
               </div>
               <!-- /.card-body -->
+              
+              <div class="card-footer">
+                  <pagination :data="users" 
+                    @pagination-change-page="getResults">
+                  </pagination>
+              </div>
+
             </div>
             <!-- /.card -->
           </div>
         </div>
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" v-else>
             <div class="col-md-10 mt-5">
                 <not-found-error></not-found-error>
             </div>
@@ -150,6 +157,12 @@
             }
         },
         methods: {
+            getResults(page = 1) {
+                axios.get('api/user?page=' + page)
+                    .then(response => {
+                        this.users = response.data;
+                    });
+            },
             updateUser() {
                 this.$Progress.start();
                 //console.log('Editing data');
