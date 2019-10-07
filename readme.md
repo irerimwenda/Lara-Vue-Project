@@ -1,5 +1,5 @@
 ## Lara-Vue Admin
-Complete mini proect using Laravel framework and Vue.js following a tutorial series.
+Complete mini project using Laravel framework and Vue.js following a tutorial series.
 
 ### Some Features 
 * Vue-Router
